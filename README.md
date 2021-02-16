@@ -1,3 +1,10 @@
+# Go To App
+Web based application developed with react js
+
+## Tools for styling
+1. Material UI
+2. React Bootstrap
+3. SCSS
 
 ## Available Scripts
 
