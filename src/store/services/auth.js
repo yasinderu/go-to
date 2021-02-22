@@ -1,4 +1,4 @@
-import axios from '../../axios';
+import axios from './axios';
 
 export const signUp = payload => axios.post('/user/signup', payload);
 

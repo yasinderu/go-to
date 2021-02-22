@@ -97,13 +97,11 @@ const PostCard = ({ post }) => {
 const Home = props => {
 	const dispatch = useDispatch();
 	const onFetchPost = useCallback(() => dispatch(actions.fetchAllPosts()), [dispatch]);
-	const { posts } = useSelector(state => state.post);
+	const { posts, isLoading } = useSelector(state => state.post);
 
 	useEffect(() => {
 		onFetchPost();
 	}, [onFetchPost]);
-
-	console.log(posts);
 
 	return (
 		<React.Fragment>
@@ -120,13 +118,20 @@ const Home = props => {
 				))}
 			</Carousel>
 			<div className='card-container'>
-				<Row md={4}>
-					{posts.map((post, index) => (
-						<Col key={index}>
-							<PostCard key={index} post={post} />
-						</Col>
-					))}
-				</Row>
+				{isLoading ? (
+					<div style={{ display: 'flex', alignItems: 'center', margin: 'auto' }}>
+						<h3>Loading ... </h3>
+					</div>
+				) : (
+					<Row md={4}>
+						{posts &&
+							posts.map((post, index) => (
+								<Col key={index}>
+									<PostCard key={index} post={post} />
+								</Col>
+							))}
+					</Row>
+				)}
 			</div>
 		</React.Fragment>
 	);

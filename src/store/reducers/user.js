@@ -1,25 +1,25 @@
-import * as actionTypes from '../actions/actiontypes';
+import * as actiontypes from '../actions/actiontypes';
 
 const initialState = {
-	posts: null,
-	error: null,
+	user: null,
 	isLoading: false,
+	error: null,
 };
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
-		case actionTypes.FETCH_POSTS_START:
+		case actiontypes.FIND_USER_BY_ID_START:
 			return {
 				...state,
 				isLoading: true,
 			};
-		case actionTypes.FETCH_POSTS_SUCCESS:
+		case actiontypes.FIND_USER_BY_ID_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
-				posts: action.payload,
+				user: action.payload,
 			};
-		case actionTypes.FETCH_POSTS_FAILED:
+		case actiontypes.FIND_USER_BY_ID_FAILED:
 			return {
 				...state,
 				isLoading: false,
