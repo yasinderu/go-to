@@ -4,6 +4,8 @@ import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 
 import Home from './container/Home/Home';
 import Auth from './container/Auth/Auth';
+import Blog from './container/Blog/Blog';
+
 import * as actions from './store/actions';
 
 function App() {
@@ -17,7 +19,6 @@ function App() {
 		<Switch>
 			<Route path='/' exact component={Home} />
 			<Route path='/auth' component={Auth} />
-			<Redirect to='/' />
 		</Switch>
 	);
 
@@ -25,6 +26,7 @@ function App() {
 		routes = (
 			<Switch>
 				<Route path='/' exact component={Home} />
+				<Route path='/blog' component={Blog} />
 				<Route path='/auth' component={Auth} />
 			</Switch>
 		);

@@ -21,6 +21,10 @@ const useStyles = makeStyles(theme => ({
 	menuButton: {
 		marginRight: theme.spacing(2),
 	},
+	button: {
+		display: 'flex',
+		justifyContent: 'space-between',
+	},
 	title: {
 		flexGrow: 1,
 	},
@@ -34,7 +38,9 @@ const NavBar = () => {
 
 	const authLogout = () => {
 		dispatch(actions.logout());
+		history.push('/');
 	};
+
 	return (
 		<AppBar className={classes.root} position='fixed'>
 			<Toolbar>
@@ -46,9 +52,21 @@ const NavBar = () => {
 				>
 					<MenuIcon />
 				</IconButton>
-				<Typography variant='h6' className={classes.title}>
-					News
+				<Typography
+					variant='h6'
+					className={classes.title}
+					onClick={() => history.push('/')}
+				>
+					Home
 				</Typography>
+				{auth.isAuth && (
+					<div className={classes.button}>
+						<Button color='inherit' onClick={() => history.push('/blog')}>
+							My Blog
+						</Button>
+						<Button color='inherit'>Profile</Button>
+					</div>
+				)}
 				<Button
 					color='inherit'
 					onClick={auth.isAuth ? () => authLogout() : () => history.push('/auth')}

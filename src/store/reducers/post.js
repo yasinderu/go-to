@@ -25,6 +25,23 @@ const reducer = (state = initialState, action) => {
 				isLoading: false,
 				error: action.payload,
 			};
+		case actionTypes.FETCH_POSTS_BY_USER_ID_START:
+			return {
+				...state,
+				isLoading: true,
+			};
+		case actionTypes.FETCH_POSTS_BY_USER_ID_SUCCESS:
+			return {
+				...state,
+				isLoading: false,
+				posts: action.payload,
+			};
+		case actionTypes.FETCH_POSTS_BY_USER_ID_FAILED:
+			return {
+				...state,
+				isLoading: false,
+				error: action.payload,
+			};
 		default:
 			return state;
 	}

@@ -11,40 +11,13 @@ import {
 	CardContent,
 	CardMedia,
 	CssBaseline,
+	Container,
 } from '@material-ui/core';
 
 import { Carousel, Row, Col } from 'react-bootstrap';
 
 import NavBar from '../../component/Navigation/NavBar';
 import BlogHeader from '../../component/Header/Header';
-import './Home.scss';
-import mountIreng from '../../assets/Img/Home/ireng.jpg';
-import krakal from '../../assets/Img/Home/krakal.jpg';
-import likman from '../../assets/Img/Home/likman.jpg';
-import ratuboko from '../../assets/Img/Home/ratuboko.jpg';
-
-const items = [
-	{
-		name: 'Mount Ireng',
-		img: mountIreng,
-		desc: 'Hello Word #1',
-	},
-	{
-		name: 'Krakal Beach',
-		img: krakal,
-		desc: 'Hello Word #2',
-	},
-	{
-		name: 'Angkringan',
-		img: likman,
-		desc: 'Hello Word #2',
-	},
-	{
-		name: 'Ratu Boko Tample',
-		img: ratuboko,
-		desc: 'Hello Word #2',
-	},
-];
 
 const PostCard = ({ post }) => {
 	const [hover, setHover] = useState(false);
@@ -96,31 +69,24 @@ const PostCard = ({ post }) => {
 	);
 };
 
-const Home = props => {
+const Blog = props => {
 	const dispatch = useDispatch();
-	const onFetchPost = useCallback(() => dispatch(actions.fetchAllPosts()), [dispatch]);
+	const onFetchPost = useCallback(
+		userId => dispatch(actions.fetchPostsByUserId(userId)),
+		[dispatch]
+	);
 	const { posts, isLoading } = useSelector(state => state.post);
+	const { userId } = useSelector(state => state.auth);
 
 	useEffect(() => {
-		onFetchPost();
+		onFetchPost(userId);
 	}, [onFetchPost]);
 
 	return (
 		<React.Fragment>
 			<CssBaseline />
 			<NavBar />
-			<Carousel>
-				{items.map((item, index) => (
-					<Carousel.Item key={index}>
-						<img style={{ width: '100%' }} src={item.img} alt='not found' />
-						<Carousel.Caption>
-							<h2>{item.name}</h2>
-							<h5>Subtitle</h5>
-						</Carousel.Caption>
-					</Carousel.Item>
-				))}
-			</Carousel>
-			<div className='card-container'>
+			<Container maxWidth='lg'>
 				<BlogHeader />
 				{isLoading ? (
 					<div style={{ display: 'flex', alignItems: 'center', margin: 'auto' }}>
@@ -136,9 +102,9 @@ const Home = props => {
 							))}
 					</Row>
 				)}
-			</div>
+			</Container>
 		</React.Fragment>
 	);
 };
 
-export default Home;
+export default Blog;
