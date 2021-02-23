@@ -1,4 +1,4 @@
-export { fetchAllPosts } from './post';
+export { fetchAllPosts, fetchPostsByCategory } from './post';
 export {
 	authSignUp,
 	authLogin,
@@ -7,3 +7,4 @@ export {
 	authCheckState,
 	logout,
 } from './auth';
+export { fetchAllCategory } from './category';

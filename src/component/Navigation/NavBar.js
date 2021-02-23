@@ -16,7 +16,7 @@ import * as actions from '../../store/actions';
 const useStyles = makeStyles(theme => ({
 	root: {
 		backgroundColor: 'black',
-		boxShadow: 0,
+		boxShadow: '10px',
 	},
 	menuButton: {
 		marginRight: theme.spacing(2),

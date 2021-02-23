@@ -10,11 +10,13 @@ import {
 	Typography,
 	CardContent,
 	CardMedia,
+	CssBaseline,
 } from '@material-ui/core';
 
 import { Carousel, Row, Col } from 'react-bootstrap';
 
 import NavBar from '../../component/Navigation/NavBar';
+import BlogHeader from './Header';
 import './Home.scss';
 import mountIreng from '../../assets/Img/Home/ireng.jpg';
 import krakal from '../../assets/Img/Home/krakal.jpg';
@@ -95,6 +97,12 @@ const PostCard = ({ post }) => {
 };
 
 const Home = props => {
+	// const useStyles = makeStyles({
+	// 	root: {
+	// 		marginTop: 100,
+	// 	},
+	// });
+	// const classes = useStyles();
 	const dispatch = useDispatch();
 	const onFetchPost = useCallback(() => dispatch(actions.fetchAllPosts()), [dispatch]);
 	const { posts, isLoading } = useSelector(state => state.post);
@@ -105,7 +113,9 @@ const Home = props => {
 
 	return (
 		<React.Fragment>
+			<CssBaseline />
 			<NavBar />
+			{/* <Container maxWidth='lg'> */}
 			<Carousel>
 				{items.map((item, index) => (
 					<Carousel.Item key={index}>
@@ -118,6 +128,7 @@ const Home = props => {
 				))}
 			</Carousel>
 			<div className='card-container'>
+				<BlogHeader />
 				{isLoading ? (
 					<div style={{ display: 'flex', alignItems: 'center', margin: 'auto' }}>
 						<h3>Loading ... </h3>
@@ -133,6 +144,7 @@ const Home = props => {
 					</Row>
 				)}
 			</div>
+			{/* </Container> */}
 		</React.Fragment>
 	);
 };
