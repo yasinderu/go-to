@@ -5,7 +5,7 @@ import {
 	AppBar,
 	Toolbar,
 	IconButton,
-	Button,
+	Link,
 	Typography,
 	makeStyles,
 } from '@material-ui/core';
@@ -18,12 +18,15 @@ const useStyles = makeStyles(theme => ({
 		backgroundColor: 'black',
 		boxShadow: '10px',
 	},
-	menuButton: {
+	menuButtom: {
 		marginRight: theme.spacing(2),
 	},
-	button: {
-		display: 'flex',
-		justifyContent: 'space-between',
+	link: {
+		marginLeft: 12,
+		marginRight: 12,
+		':hover': {
+			boxShadow: 5,
+		},
 	},
 	title: {
 		flexGrow: 1,
@@ -53,26 +56,48 @@ const NavBar = () => {
 					<MenuIcon />
 				</IconButton>
 				<Typography
-					variant='h6'
 					className={classes.title}
+					variant='h5'
 					onClick={() => history.push('/')}
 				>
-					Home
+					<Link component='button' color='inherit' underline='none'>
+						Home
+					</Link>
 				</Typography>
 				{auth.isAuth && (
 					<div className={classes.button}>
-						<Button color='inherit' onClick={() => history.push('/blog')}>
-							My Blog
-						</Button>
-						<Button color='inherit'>Profile</Button>
+						<Typography variant='h6'>
+							<Link
+								component='button'
+								underline='none'
+								color='inherit'
+								className={classes.link}
+								onClick={() => history.push('/blog')}
+							>
+								My Blog
+							</Link>
+							<Link
+								className={classes.link}
+								component='button'
+								underline='none'
+								color='inherit'
+							>
+								Profile
+							</Link>
+						</Typography>
 					</div>
 				)}
-				<Button
-					color='inherit'
-					onClick={auth.isAuth ? () => authLogout() : () => history.push('/auth')}
-				>
-					{auth.isAuth ? 'Logout' : 'Login'}
-				</Button>
+				<Typography variant='h6'>
+					<Link
+						color='inherit'
+						component='button'
+						underline='none'
+						className={classes.link}
+						onClick={auth.isAuth ? () => authLogout() : () => history.push('/auth')}
+					>
+						{auth.isAuth ? 'Logout' : 'Login'}
+					</Link>
+				</Typography>
 			</Toolbar>
 		</AppBar>
 	);

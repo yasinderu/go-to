@@ -1,4 +1,9 @@
-export { fetchAllPosts, fetchPostsByCategory, fetchPostsByUserId } from './post';
+export {
+	fetchAllPosts,
+	fetchPostsByCategory,
+	fetchPostsByUserId,
+	fetchPostByCategoryAndUser,
+} from './post';
 export {
 	authSignUp,
 	authLogin,

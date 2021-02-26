@@ -1,5 +1,10 @@
 import * as actionTypes from './actiontypes';
-import { getAll, getByCategoryId, getByUserId } from '../services/post';
+import {
+	getAll,
+	getByCategoryId,
+	getByUserId,
+	getByCategoryIdAndUserId,
+} from '../services/post';
 
 export const fetchAllPosts = () => async dispatch => {
 	try {
@@ -46,5 +51,28 @@ export const fetchPostsByUserId = userId => async dispatch => {
 		}
 	} catch (err) {
 		dispatch({ type: actionTypes.FETCH_POSTS_BY_USER_ID_FAILED, payload: err.message });
+	}
+};
+
+export const fetchPostByCategoryAndUser = (categoryId, userId) => async dispatch => {
+	try {
+		dispatch({ type: actionTypes.FETCH_POST_BY_CATEGORY_AND_USER_START });
+		const res = await getByCategoryIdAndUserId(categoryId, userId);
+		if (res.status === 200) {
+			dispatch({
+				type: actionTypes.FETCH_POST_BY_CATEGORY_AND_USER_SUCCESS,
+				payload: res.data.value,
+			});
+		} else {
+			dispatch({
+				type: actionTypes.FETCH_POST_BY_CATEGORY_AND_USER_FAILED,
+				payload: res.data.message,
+			});
+		}
+	} catch (err) {
+		dispatch({
+			type: actionTypes.FETCH_POST_BY_CATEGORY_AND_USER_FAILED,
+			payload: err.message,
+		});
 	}
 };

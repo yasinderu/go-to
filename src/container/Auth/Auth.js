@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import {
 	Avatar,
 	Button,
@@ -66,6 +66,8 @@ const Auth = () => {
 	const dispatch = useDispatch();
 	const { auth } = useSelector(state => state);
 
+	const history = useHistory();
+
 	useEffect(() => {
 		if (auth.authRedirectPath !== '/') {
 			dispatch(actions.setAuthRedirect('/'));
@@ -104,7 +106,13 @@ const Auth = () => {
 				});
 		} else {
 			const userData = { ...signInForm };
-			dispatch(actions.authLogin(userData));
+			dispatch(actions.authLogin(userData))
+				.then(res => {
+					window.location.reload();
+				})
+				.catch(err => {
+					console.log(err);
+				});
 		}
 	};
 

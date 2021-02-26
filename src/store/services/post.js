@@ -8,3 +8,8 @@ export const getByCategoryId = categoryId =>
 
 export const getByUserId = userId =>
 	axiosProtect.get(`/posts/getByUser?userId=${userId}`);
+
+export const getByCategoryIdAndUserId = (categoryId, userId) =>
+	axiosProtect.get(
+		`/posts/getByCategoryAndUserId?categoryId=${categoryId}&userId=${userId}`
+	);

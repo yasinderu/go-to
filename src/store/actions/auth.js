@@ -1,5 +1,6 @@
 import * as actionTypes from './actiontypes';
 import { signUp, login } from '../services/auth';
+import { getCookie, setCookie, deleteCookie } from '../../utils/Cookies';
 
 export const authSignUp = payload => async dispatch => {
 	try {
@@ -22,17 +23,17 @@ export const authLogin = payload => async dispatch => {
 		dispatch({ type: actionTypes.AUTH_SIGNIN_START });
 		const res = await login(payload);
 		if (res.status === 200) {
+			const expirationDate = new Date(
+				new Date().getTime() + res.data.token.expiresIn * 1000
+			);
+			setCookie('token', res.data.token.value);
+			setCookie('expirationDate', expirationDate);
+			setCookie('userId', res.data.value.id);
 			dispatch({
 				type: actionTypes.AUTH_SIGNIN_SUCCESS,
 				userId: res.data.value.id,
 				token: res.data.token.value,
 			});
-			const expirationDate = new Date(
-				new Date().getTime() + res.data.token.expiresIn * 1000
-			);
-			localStorage.setItem('token', res.data.token.value);
-			localStorage.setItem('expirationDate', expirationDate);
-			localStorage.setItem('userId', res.data.value.id);
 		} else {
 			dispatch({ type: actionTypes.AUTH_SIGNIN_FAILED, payload: res.data.message });
 		}
@@ -50,9 +51,9 @@ export const setAuthRedirect = path => {
 
 export const logout = () => {
 	console.log('loging out');
-	localStorage.removeItem('token');
-	localStorage.removeItem('expirationDate');
-	localStorage.removeItem('userId');
+	deleteCookie('token');
+	deleteCookie('expirationDate');
+	deleteCookie('userId');
 	return {
 		type: actionTypes.AUTH_LOGOUT,
 	};
@@ -67,12 +68,12 @@ export const checkAuthTimeout = expiresTime => {
 };
 
 export const authCheckState = () => dispatch => {
-	const token = localStorage.getItem('token');
-	const userId = localStorage.getItem('userId');
+	const token = getCookie('token');
+	const userId = getCookie('userId');
 	if (!token) {
 		dispatch(logout());
 	} else {
-		const expirationDate = new Date(localStorage.getItem('expirationDate'));
+		const expirationDate = new Date(getCookie('expirationDate'));
 		if (expirationDate <= new Date()) {
 			dispatch(logout());
 		} else {

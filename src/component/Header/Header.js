@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import * as actions from '../../store/actions';
 import { Paper, Tabs, Tab } from '@material-ui/core';
@@ -31,13 +32,24 @@ const Header = () => {
 		dispatch,
 	]);
 	const { categories } = useSelector(state => state.category);
+	const { isAuth, userId } = useSelector(state => state.auth);
+
+	const history = useHistory();
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
-		if (newValue === 0) {
-			dispatch(actions.fetchAllPosts());
+		if (isAuth && history.location.pathname !== '/') {
+			if (newValue === 0) {
+				dispatch(actions.fetchPostsByUserId(userId));
+			} else {
+				dispatch(actions.fetchPostByCategoryAndUser(newValue, userId));
+			}
 		} else {
-			dispatch(actions.fetchPostsByCategory(newValue));
+			if (newValue === 0) {
+				dispatch(actions.fetchAllPosts());
+			} else {
+				dispatch(actions.fetchPostsByCategory(newValue));
+			}
 		}
 	};
 

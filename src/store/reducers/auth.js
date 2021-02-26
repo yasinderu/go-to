@@ -57,7 +57,7 @@ const reducer = (state = initialState, action) => {
 				userId: null,
 				token: null,
 				isAuth: false,
-				authRedirectPath: '/',
+				authRedirectPath: null,
 			};
 		default:
 			return state;

@@ -1,6 +1,12 @@
 import axios from 'axios';
+import { getCookie } from '../../utils/Cookies';
 
-const token = localStorage.getItem('token');
+// window.location.reload();
+
+const token = getCookie('token');
+// if (!token) {
+// 	window.location.reload();
+// }
 const baseUrl = process.env.REACT_APP_SERVICE_BASE;
 
 const instance = axios.create({
@@ -8,7 +14,7 @@ const instance = axios.create({
 	headers: {
 		'Content-Type': 'application/json',
 		'Access-Control-Allow-Origin': '*',
-		Authorization: 'Bearer ' + token,
+		Authorization: token,
 	},
 });
 
