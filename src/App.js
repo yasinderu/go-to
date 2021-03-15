@@ -5,6 +5,7 @@ import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import Home from './container/Home/Home';
 import Auth from './container/Auth/Auth';
 import Blog from './container/Blog/Blog';
+import Profile from './container/Profile/Profile';
 
 import * as actions from './store/actions';
 
@@ -28,6 +29,7 @@ function App() {
 				<Route path='/' exact component={Home} />
 				<Route path='/blog' component={Blog} />
 				<Route path='/auth' component={Auth} />
+				<Route path='/profile' component={Profile} />
 			</Switch>
 		);
 	}

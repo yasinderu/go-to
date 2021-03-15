@@ -81,6 +81,7 @@ const NavBar = () => {
 								component='button'
 								underline='none'
 								color='inherit'
+								onClick={() => history.push('/profile')}
 							>
 								Profile
 							</Link>

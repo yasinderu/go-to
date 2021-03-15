@@ -12,4 +12,6 @@ export {
 	authCheckState,
 	logout,
 } from './auth';
+
+export { findUserById } from './user';
 export { fetchAllCategory } from './category';

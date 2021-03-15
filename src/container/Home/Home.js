@@ -68,14 +68,16 @@ const Home = props => {
 						<h3>Loading ... </h3>
 					</div>
 				) : (
-					<Row md={4}>
-						{posts &&
-							posts.map((post, index) => (
-								<Col key={index}>
-									<PostCard key={index} post={post} />
-								</Col>
-							))}
-					</Row>
+					<div className='inner-container'>
+						<Row md={4}>
+							{posts &&
+								posts.map((post, index) => (
+									<Col key={index}>
+										<PostCard key={index} post={post} />
+									</Col>
+								))}
+						</Row>
+					</div>
 				)}
 			</div>
 		</React.Fragment>

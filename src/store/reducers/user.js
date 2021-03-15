@@ -1,7 +1,7 @@
 import * as actiontypes from '../actions/actiontypes';
 
 const initialState = {
-	user: null,
+	userProfile: null,
 	isLoading: false,
 	error: null,
 };
@@ -14,10 +14,11 @@ const reducer = (state = initialState, action) => {
 				isLoading: true,
 			};
 		case actiontypes.FIND_USER_BY_ID_SUCCESS:
+			// console.log(action.payload);
 			return {
 				...state,
 				isLoading: false,
-				user: action.payload,
+				userProfile: action.payload,
 			};
 		case actiontypes.FIND_USER_BY_ID_FAILED:
 			return {
