@@ -7,6 +7,7 @@ export const findUserById = userId => async dispatch => {
 		const res = await findById(userId);
 		if (res.status === 200) {
 			dispatch({ type: actionTypes.FIND_USER_BY_ID_SUCCESS, payload: res.data.value });
+			return res.data.value;
 		} else {
 			dispatch({ type: actionTypes.FIND_USER_BY_ID_FAILED, payload: res.data.message });
 		}

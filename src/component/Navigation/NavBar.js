@@ -74,7 +74,7 @@ const NavBar = () => {
 								className={classes.link}
 								onClick={() => history.push('/blog')}
 							>
-								My Blog
+								My Posts
 							</Link>
 							<Link
 								className={classes.link}
