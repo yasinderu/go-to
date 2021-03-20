@@ -31,7 +31,7 @@ const DisabledTextField = props => {
 	);
 };
 
-const Profile = props => {
+const Profile = () => {
 	const dispatch = useDispatch();
 	const { userId } = useSelector(state => state.auth);
 	const [profileForm, setProfileForm] = useState({
@@ -62,8 +62,8 @@ const Profile = props => {
 	}, []);
 	return (
 		<React.Fragment>
+			<NavBar />
 			<Container>
-				<NavBar />
 				<div className='profile-card'>
 					<div className='content' style={{ justifyContent: 'space-evenly' }}>
 						<div className='profile-picture'>
