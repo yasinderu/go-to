@@ -7,13 +7,13 @@ import NavBar from '../../component/Navigation/NavBar';
 import * as actions from '../../store/actions/index';
 
 const DisabledTextField = props => {
-	const { name, value, label } = props;
+	const { name, value, label, changeHandler } = props;
 	const [edit, setEdit] = useState(false);
 	return (
 		<div className='text-field '>
 			<div style={{ width: 300 }}>
 				<TextField
-					disabled={edit ? false : true}
+					disabled={!edit}
 					fullWidth
 					name={name}
 					label={label}
@@ -22,7 +22,7 @@ const DisabledTextField = props => {
 					InputLabelProps={{
 						shrink: true,
 					}}
-					onChange={props.changeHandler}
+					onChange={changeHandler}
 					// required
 				/>
 			</div>
