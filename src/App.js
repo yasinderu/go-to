@@ -6,6 +6,7 @@ import Home from './container/Home/Home';
 import Auth from './container/Auth/Auth';
 import Blog from './container/Blog/Blog';
 import Profile from './container/Profile/Profile';
+import Post from './container/Blog/Post';
 
 import * as actions from './store/actions';
 
@@ -20,6 +21,7 @@ function App() {
 		<Switch>
 			<Route path='/' exact component={Home} />
 			<Route path='/auth' component={Auth} />
+			<Route path='/post/:postId' component={Post} />
 		</Switch>
 	);
 
@@ -30,6 +32,7 @@ function App() {
 				<Route path='/blog' component={Blog} />
 				<Route path='/auth' component={Auth} />
 				<Route path='/profile' component={Profile} />
+				<Route path='/:postId' component={Post} />
 			</Switch>
 		);
 	}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
 	Button,
 	makeStyles,
@@ -23,12 +24,14 @@ const PostCard = ({ post }) => {
 		},
 	});
 	const classes = useStyles();
+	const history = useHistory();
 
 	return (
 		<Card
 			className={classes.root}
 			onMouseEnter={() => setHover(true)}
 			onMouseLeave={() => setHover(false)}
+			onClick={() => history.push(`/post/${post.postId}`)}
 		>
 			<CardActionArea>
 				<CardMedia

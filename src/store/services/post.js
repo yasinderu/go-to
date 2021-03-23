@@ -13,3 +13,5 @@ export const getByCategoryIdAndUserId = (categoryId, userId) =>
 	axiosProtect.get(
 		`/posts/getByCategoryAndUserId?categoryId=${categoryId}&userId=${userId}`
 	);
+
+export const getById = postId => axiosProtect.get(`/posts/getById/${postId}`);

@@ -3,6 +3,7 @@ export {
 	fetchPostsByCategory,
 	fetchPostsByUserId,
 	fetchPostByCategoryAndUser,
+	showPostbyId,
 } from './post';
 export {
 	authSignUp,

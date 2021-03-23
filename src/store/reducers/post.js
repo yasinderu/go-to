@@ -61,6 +61,24 @@ const reducer = (state = initialState, action) => {
 				error: action.payload,
 				posts: null,
 			};
+		case actionTypes.SHOW_POST_BY_ID_START:
+			return {
+				...state,
+				isLoading: true,
+			};
+		case actionTypes.SHOW_POST_BY_ID_SUCCESS:
+			console.log(action.payload);
+			return {
+				...state,
+				isLoading: false,
+				posts: action.payload,
+			};
+		case actionTypes.SHOW_POST_BY_ID_FAILED:
+			return {
+				...state,
+				isLoading: false,
+				error: action.payload,
+			};
 		default:
 			return state;
 	}

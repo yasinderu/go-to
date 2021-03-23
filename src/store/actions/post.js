@@ -4,6 +4,7 @@ import {
 	getByCategoryId,
 	getByUserId,
 	getByCategoryIdAndUserId,
+	getById,
 } from '../services/post';
 
 export const fetchAllPosts = () => async dispatch => {
@@ -74,5 +75,20 @@ export const fetchPostByCategoryAndUser = (categoryId, userId) => async dispatch
 			type: actionTypes.FETCH_POST_BY_CATEGORY_AND_USER_FAILED,
 			payload: err.message,
 		});
+	}
+};
+
+export const showPostbyId = postId => async dispatch => {
+	try {
+		dispatch({ type: actionTypes.SHOW_POST_BY_ID_START });
+		const res = await getById(postId);
+		if (res.status === 200) {
+			dispatch({ type: actionTypes.SHOW_POST_BY_ID_SUCCESS, payload: res.data.value[0] });
+			return res.data.value;
+		} else {
+			dispatch({ type: actionTypes.SHOW_POST_BY_ID_FAILED, payload: res.data.message });
+		}
+	} catch (err) {
+		dispatch({ type: actionTypes.SHOW_POST_BY_ID_FAILED, payload: err.message });
 	}
 };
